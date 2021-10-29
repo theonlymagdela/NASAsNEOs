@@ -1,13 +1,13 @@
-"""Convert datetimes to and from strings.
+"""Convert date times to and from strings.
 
-NASA's dataset provides timestamps as naive datetimes (corresponding to UTC).
+NASA's dataset provides timestamps as naive date times (corresponding to UTC).
 
 The `cd_to_datetime` function converts a string, formatted as the `cd` field of
 NASA's close approach data, into a Python `datetime`
 
 The `datetime_to_str` function converts a Python `datetime` into a string.
 Although `datetime`s already have human-readable string representations, those
-representations display seconds, but NASA's data (and our datetimes!) don't
+representations display seconds, but NASA's data (and our date times!) don't
 provide that level of resolution, so the output format also will not.
 """
 import datetime
