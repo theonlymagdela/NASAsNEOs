@@ -45,6 +45,14 @@ class NEODatabase:
         # TODO: What additional auxiliary data structures will be useful?
 
         # TODO: Link together the NEOs and their close approaches.
+        for neo in self._neos:
+            for approach in self._approaches:
+                if neo.designation == approach._designation:
+                    neo_by_des = self.get_neo_by_designation(approach._designation)
+                    if neo_by_des:
+                        approach.neo = neo_by_des
+                    if approach:
+                        neo.approaches.append(approach)
 
     def get_neo_by_designation(self, designation):
         """Find and return an NEO by its primary designation.
@@ -60,7 +68,11 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired primary designation, or `None`.
         """
         # TODO: Fetch an NEO by its primary designation.
-        return None
+        for neo in self._neos:
+            if neo.designation == designation:
+                return neo.designation
+            else:
+                return None
 
     def get_neo_by_name(self, name):
         """Find and return an NEO by its name.
@@ -77,7 +89,11 @@ class NEODatabase:
         :return: The `NearEarthObject` with the desired name, or `None`.
         """
         # TODO: Fetch an NEO by its name.
-        return None
+        for neo in self._neos:
+            if neo.name == name:
+                return neo.name
+            else:
+                return None
 
     def query(self, filters=()):
         """Query close approaches to generate those that match a collection of filters.
@@ -88,7 +104,7 @@ class NEODatabase:
         If no arguments are provided, generate all known close approaches.
 
         The `CloseApproach` objects are generated in internal order, which isn't
-        guaranteed to be sorted meaninfully, although is often sorted by time.
+        guaranteed to be sorted meaningfully, although is often sorted by time.
 
         :param filters: A collection of filters capturing user-specified criteria.
         :return: A stream of matching `CloseApproach` objects.
