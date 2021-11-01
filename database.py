@@ -70,7 +70,7 @@ class NEODatabase:
         # TODO: Fetch an NEO by its primary designation.
         for neo in self._neos:
             if neo.designation == designation:
-                return neo.designation
+                return neo
             else:
                 return None
 
@@ -91,7 +91,7 @@ class NEODatabase:
         # TODO: Fetch an NEO by its name.
         for neo in self._neos:
             if neo.name == name:
-                return neo.name
+                return neo
             else:
                 return None
 
@@ -110,5 +110,10 @@ class NEODatabase:
         :return: A stream of matching `CloseApproach` objects.
         """
         # TODO: Generate `CloseApproach` objects that match all of the filters.
-        for approach in self._approaches:
-            yield approach
+        if filters:
+            for approach in self._approaches:
+                if all(map(lambda x: x(approach), filters)):
+                    yield approach
+        else:
+            for approach in self._approaches:
+                yield approach
