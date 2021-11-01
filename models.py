@@ -48,8 +48,6 @@ class NearEarthObject:
         # You should coerce these values to their appropriate data type and
         # handle any edge cases, such as a empty name being represented by `None`
         # and a missing diameter being represented by `float('nan')`.
-        if approaches is None:
-            approaches = []
 
         self.designation = designation
 
@@ -69,7 +67,10 @@ class NearEarthObject:
             self.diameter = float('nan')
 
         # Create an empty initial collection of linked approaches.
-        self.approaches = approaches
+        if approaches is None:
+            self.approaches = []
+        else:
+            self.approaches = approaches
 
     @property
     def fullname(self):

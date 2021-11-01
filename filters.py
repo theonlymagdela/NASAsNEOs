@@ -142,35 +142,25 @@ def create_filters(date=None, start_date=None, end_date=None,
     filters = set()
 
     if date:
-        f = DateFilter(operator.eq, date)
-        filters.add(f)
+        filters.add(DateFilter(operator.eq, date))
     if start_date:
-        f = DateFilter(operator.ge, start_date)
-        filters.add(f)
+        filters.add(DateFilter(operator.ge, start_date))
     if end_date:
-        f = DateFilter(operator.le, end_date)
-        filters.add(f)
+        filters.add(DateFilter(operator.le, end_date))
     if distance_min:
-        f = DistanceFilter(operator.ge, distance_min)
-        filters.add(f)
+        filters.add(DistanceFilter(operator.ge, distance_min))
     if distance_max:
-        f = DistanceFilter(operator.le, distance_max)
-        filters.add(f)
+        filters.add(DistanceFilter(operator.le, distance_max))
     if velocity_min:
-        f = VelocityFilter(operator.ge, velocity_min)
-        filters.add(f)
+        filters.add(VelocityFilter(operator.ge, velocity_min))
     if velocity_max:
-        f = VelocityFilter(operator.le, velocity_max)
-        filters.add(f)
+        filters.add(VelocityFilter(operator.le, velocity_max))
     if diameter_min:
-        f = DiameterFilter(operator.ge, diameter_min)
-        filters.add(f)
+        filters.add(DiameterFilter(operator.ge, diameter_min))
     if diameter_max:
-        f = DiameterFilter(operator.le, diameter_max)
-        filters.add(f)
+        filters.add(DiameterFilter(operator.le, diameter_max))
     if hazardous is not None:
-        f = HazardousFilter(operator.eq, hazardous)
-        filters.add(f)
+        filters.add(HazardousFilter(operator.eq, hazardous))
 
     return filters
 
