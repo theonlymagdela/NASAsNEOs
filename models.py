@@ -50,6 +50,7 @@ class NearEarthObject:
         # and a missing diameter being represented by `float('nan')`.
         if approaches is None:
             approaches = []
+
         self.designation = designation
 
         if hazardous == 'N':
@@ -124,7 +125,7 @@ class CloseApproach:
         # onto attributes named `_designation`, `time`, `distance`, and `velocity`.
         # You should coerce these values to their appropriate data type and handle any edge cases.
         # The `cd_to_datetime` function will be useful.
-        self._designation = designation
+        self.designation = designation
         self.time = cd_to_datetime(time)  # TODO: Use the cd_to_datetime function for this attribute.
         self.distance = float(distance)
         self.velocity = float(velocity)

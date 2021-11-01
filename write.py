@@ -12,6 +12,7 @@ You'll edit this file in Part 4.
 """
 import csv
 import json
+from helpers import datetime_to_str
 
 
 def write_to_csv(results, filename):
@@ -27,11 +28,26 @@ def write_to_csv(results, filename):
     fieldnames = ('datetime_utc', 'distance_au', 'velocity_km_s', 'designation', 'name', 'diameter_km',
                   'potentially_hazardous')
     # TODO: Write the results to a CSV file, following the specification in the instructions.
-    with open(filename, 'w') as outfile:
-        writer = csv.DictWriter(outfile, fieldnames)
+    with open(filename, 'w', newline='') as outfile:
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)
         writer.writeheader()
-        for row in results:
-            writer.writerow(row)
+        for result in results:
+            if result.neo.name is None:
+                result.neo.name = ''
+            if result.neo.diameter is float('nan'):
+                result.neo.diameter = ''
+            if result.neo.hazardous is True:
+                result.neo.hazardous = 'True'
+            if result.neo.hazardous is False:
+                result.neo.hazardous = 'False'
+            row = [{'datetime_utc': result.time.date(),
+                    'distance_au': result.distance,
+                    'velocity_km_s': result.velocity,
+                    'designation': result.designation,
+                    'name': result.neo.name,
+                    'diameter_km': result.neo.diameter,
+                    'potentially_hazardous': result.neo.hazardous}]
+            writer.writerows(row)
 
 
 def write_to_json(results, filename):
@@ -47,4 +63,15 @@ def write_to_json(results, filename):
     """
     # TODO: Write the results to a JSON file, following the specification in the instructions.
     with open(filename, 'w') as outfile:
-        json.dump(results, outfile, indent=2)
+        writable_results = []
+        for result in results:
+            if result.neo.name is None:
+                result.neo.name = ''
+            writable_results.append({'datetime_utc': datetime_to_str(result.time),
+                                     'distance_au': float(result.distance),
+                                     'velocity_km_s': float(result.velocity),
+                                     'neo': {'designation': str(result.neo.designation),
+                                             'name': str(result.neo.name),
+                                             'diameter_km': result.neo.diameter,
+                                             'potentially_hazardous': result.neo.hazardous}})
+        json.dump(writable_results, outfile, indent=2)
