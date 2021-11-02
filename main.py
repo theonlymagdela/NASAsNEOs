@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Explore a dataset of near-Earth objects and their close approaches to Earth.
 
 See `README.md` for a detailed discussion of this project.
@@ -246,6 +245,7 @@ class NEOShell(cmd.Cmd):
     inspect and query commands, while only loading the data (which can be quite
     slow) once.
     """
+
     intro = ("Explore close approaches of near-Earth objects. "
              "Type `help` or `?` to list commands and `exit` to exit.\n")
     prompt = '(neo) '

@@ -71,36 +71,52 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """Return `repr(self)`, a computer-readable string representation of this object."""
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 
 class DateFilter(AttributeFilter):
+    """Construct a new subclass of `AttributeFilter`."""
+
     @classmethod
     def get(cls, approach):
+        """Get a date attribute from a close approach."""
         return approach.time.date()
 
 
 class VelocityFilter(AttributeFilter):
+    """Construct a new subclass of `AttributeFilter`."""
+
     @classmethod
     def get(cls, approach):
+        """Get a velocity attribute from a close approach."""
         return approach.velocity
 
 
 class DistanceFilter(AttributeFilter):
+    """Construct a new subclass of `AttributeFilter`."""
+
     @classmethod
     def get(cls, approach):
+        """Get a velocity attribute from a close approach."""
         return approach.distance
 
 
 class DiameterFilter(AttributeFilter):
+    """Construct a new subclass of `AttributeFilter`."""
+
     @classmethod
     def get(cls, approach):
+        """Get a diameter attribute from a close approach."""
         return approach.neo.diameter
 
 
 class HazardousFilter(AttributeFilter):
+    """Construct a new subclass of `AttributeFilter`."""
+
     @classmethod
     def get(cls, approach):
+        """Get a hazardous attribute from a close approach."""
         return approach.neo.hazardous
 
 
